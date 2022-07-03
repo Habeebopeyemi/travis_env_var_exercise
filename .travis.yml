@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - 13
+
+services:
+  - docker
+
+#Pre-testing installs
+install:
+  - echo "nothing needs to be installed"
+
+#Scripts to be run such as tests
+before_script:
+  - echo "no test"
+
+script:
+  - docker --version #print the version for logging
+  - docker build -t trav_env_var --build-arg NAME = ${NAME}.
+  - docker tag trav_env_var deveeb/travis_env_var_exercise
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push deveeb/travis_env_var_exercise
