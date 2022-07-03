@@ -15,7 +15,7 @@ before_script:
 
 script:
   - docker --version #print the version for logging
-  - docker build -t trav_env_var --build-arg NAME = ${NAME}.
+  - docker build -t trav_env_var --build-arg NAME=${DOCKER_USERNAME} .
   - docker tag trav_env_var deveeb/travis_env_var_exercise
 
 after_success:
